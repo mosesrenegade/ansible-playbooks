@@ -1,4 +1,0 @@
----
-- include: ubuntu.yml
-- include: rbenv.yml
-- include: zsh.yml
