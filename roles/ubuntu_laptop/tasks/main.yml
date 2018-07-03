@@ -4,3 +4,4 @@
 - include: zsh.yml
 - include: snaps.yml
 - include: emacs.yml
+- include: metasploit.yml

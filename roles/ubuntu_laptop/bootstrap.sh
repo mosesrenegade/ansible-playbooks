@@ -7,5 +7,5 @@ if [ "$(id -u)" != "0" ]; then
    exit 1
 fi
 
-apt install -y ssh python-apt ansible
+apt install -y ssh python-apt ansible python-psycopg2
 echo "localhost" >> /etc/ansible/hosts

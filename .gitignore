@@ -43,3 +43,6 @@ flycheck_*.el
 
 # directory configuration
 .dir-locals.el
+
+# Welp- ansible bs
+*.retry

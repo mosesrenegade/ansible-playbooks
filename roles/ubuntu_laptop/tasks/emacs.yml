@@ -9,16 +9,20 @@
     tags: packages
 
   - name: Let's get out stuff sorted by bringing over our emacs stuff
-    git: repo="https://github.com/mosesrenegade/dotfiles" dest=/home/{{ dotfiles_users }}/dotfiles
+    git: >
+      repo="https://github.com/mosesrenegade/dotfiles"
+      dest={{ dotfiles_root }}
+      accept_hostkey=yes
+      force=yes
+    ignore_errors: yes
 
   - name: Let's symlink .emacs
     file:
-      src: "/home/{{ dotfiles_users }}/dotfiles/.emacs"
-      dest: "/home/{{ dotfiles_users }}/.emacs"
+      src: "{{ emacs_dotsrc }}"
+      dest: "{{ emacs_dotdest }}"
       state: link
+    ignore_errors: yes
 
   - name: Let's symlink emacs.d
-    file:
-      src: "/home/{{ dotfiles_users }}/dotfiles/.emacs.d"
-      dest: "/home/{{ dotfiles_users }}/.emacs.d"
-      state: link
+    shell: $SHELL -lc "ln -sf {{ emacs_d_dotsrc }} {{ emacs_d_dotdest }}"
+    ignore_errors: yes

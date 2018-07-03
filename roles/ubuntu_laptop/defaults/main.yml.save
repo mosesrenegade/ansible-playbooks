@@ -1,0 +1,11 @@
+---
+laptop_installed_packages:
+- asciinema
+- emacs
+- gnome-tweak-tool
+- 
+- net-tools
+- tmux
+- unzip
+- zsh
+

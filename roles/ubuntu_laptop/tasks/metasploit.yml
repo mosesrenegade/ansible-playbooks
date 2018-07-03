@@ -1,0 +1,94 @@
+---
+- block:
+  - name: Accept oracle license
+    debconf:
+      name: oracle-java8-installer
+      question: shared/accepted-oracle-license-v1-1
+      value: 'true'
+      vtype: select
+    become: yes
+    become_user: root
+
+  - name: Install required stuff
+    apt:
+      name: "{{ item }}"
+      state: present
+    with_items: "{{ metasploit_packages }}"
+    become: yes
+    become_user: root
+    
+  - name: Git clone nmap
+    git: >
+      repo={{ nmap_repo }}
+      dest={{ nmap_compile_root }}
+      accept_hostkey=yes
+      force=yes
+    become: yes
+    become_user: root
+    ignore_errors: yes
+
+  - name: configure
+    command: '"{{ item }}" chdir=/usr/local/src/nmap/'
+    with_items:
+      - ./configure
+    become: yes
+    become_user: root
+
+  - name: make nmap from source
+    make:
+      chdir: /usr/local/src/nmap
+    become: yes
+    become_user: root
+
+  - name: install nmap
+    make:
+      chdir: /usr/local/src/nmap
+      target: install
+    become: yes
+    become_user: root
+          
+  - name: install framework from git
+    git: >
+      repo={{ framework_repo }}
+      dest={{ framework_dest }}
+      accept_hostkey=yes
+      force=yes
+    become: yes
+    become_user: root
+    ignore_errors: yes
+
+  - name: Create MSF DB
+    postgresql_db:
+      name: msf
+    become: yes
+    become_user: postgres
+   
+  - name: Create postgresql user
+    postgresql_user:
+      db: msf
+      name: msf
+      password: md59831c712289ea5c4cab145d66b4a9565
+      encrypted: yes
+      role_attr_flags: SUPERUSER,CREATEROLE,CREATEDB,REPLICATION
+    become: yes
+    become_user: postgres
+    
+  - name: Make MSF mine
+    file: >
+      dest=/opt/metasploit-framework
+      owner={{ ansible_env.USER }}
+      group={{ ansible_env.USER }}
+      recurse=yes
+    become: yes
+    become_user: root
+   
+ # - name: Set permissions for oh my zsh dir
+ #   become: yes
+ #   file:
+ #     path: "/home/{{ item }}/.oh-my-zsh"
+ #     owner: "{{ item }}"
+ #     group: "{{ item }}"
+ #     state: directory
+ #     recurse: yes
+ #   with_items: "{{ zsh_users }}"
+ #   tags: configuration

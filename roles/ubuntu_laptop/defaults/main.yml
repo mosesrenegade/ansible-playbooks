@@ -3,6 +3,8 @@ laptop_installed_packages:
 - asciinema
 - build-essential
 - emacs
+- fonts-emojione
+- fonts-twemoji-svginot
 - gnome-tweak-tool
 - libcanberra-gtk-module
 - libcurl4-openssl-dev
@@ -16,6 +18,7 @@ laptop_installed_packages:
 - network-manager-openvpn-gnome
 - openvpn
 - scdaemon
+- thunderbird
 - tmux
 - unzip
 - zlib1g-dev
@@ -69,5 +72,38 @@ rbenv_user_profile: true
 emacs_deps:
 - emacs
 
-dotfiles_users:
-  - "{{ ansible_ssh_user|default(lookup('env', 'USER')) }}"
+dotfiles_root: "/home/{{ ansible_ssh_user|default(lookup('env', 'USER')) }}/dotfiles"
+
+emacs_dotsrc: "/home/{{ ansible_ssh_user|default(lookup('env', 'USER')) }}/dotfiles/.emacs"
+
+emacs_dotdest: "/home/{{ ansible_ssh_user|default(lookup('env', 'USER')) }}/.emacs"
+
+emacs_d_dotsrc: "/home/{{ ansible_ssh_user|default(lookup('env', 'USER')) }}/dotfiles/.emacs.d"
+
+emacs_d_dotdest: "/home/{{ ansible_ssh_user|default(lookup('env', 'USER')) }}/dotfiles/.emacs.d"
+
+metasploit_packages:
+- postgresql
+- oracle-java8-installer
+- build-essential
+- libreadline-dev
+- libssl-dev
+- libpq5
+- libreadline5
+- libsqlite3-dev
+- libpcap-dev
+- git-core
+- autoconf
+- pgadmin3
+- curl
+- zlib1g-dev
+- libxml2-dev
+- libxslt1-dev
+- xtightvncviewer
+- libyaml-dev
+
+nmap_repo: "https://github.com/nmap/nmap.git"
+nmap_compile_root: "/usr/local/src/nmap"
+
+framework_repo: "https://github.com/rapid7/metasploit-framework"
+framework_dest: "/opt/metasploit-framework"

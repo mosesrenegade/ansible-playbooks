@@ -1,11 +1,33 @@
 ---
 - block:
+  - name: Add new Thunderbird Repo
+    apt_repository:
+      repo: ppa:mozillateam/thunderbird-next
+      state: present
+    become: true
+    become_user: root
+    
+  - name: Add new font repo
+    apt_repository:
+      repo: ppa:eosrei/fonts
+      state: present
+    become: true
+    become_user: root
+
+  - name: Add Java8
+    apt_repository:
+      repo: ppa:webupd8team/java
+      state: present
+    become: true
+    become_user: root
+    
   - name: update apt
     apt: update_cache=yes cache_valid_time=86400
     become: true
     become_user: root
     changed_when: false
-    
+
+
 - block:
   - name: install packages
     apt:
