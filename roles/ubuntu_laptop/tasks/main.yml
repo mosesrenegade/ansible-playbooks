@@ -1,0 +1,6 @@
+---
+- include: ubuntu.yml
+- include: rbenv.yml
+- include: zsh.yml
+- include: snaps.yml
+- include: emacs.yml

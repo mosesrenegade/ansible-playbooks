@@ -1,0 +1,7 @@
+---
+#This setups Snaps!
+- block:
+  - name: Install Slack
+    shell: snap install slack
+    become: true
+    become_user: root

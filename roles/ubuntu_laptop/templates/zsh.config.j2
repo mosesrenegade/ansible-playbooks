@@ -1,0 +1,64 @@
+export ZSH=$HOME/.oh-my-zsh
+
+ZSH_THEME="{{ zsh_ohmy_theme }}"
+#DISABLE_AUTO_UPDATE="{{ zsh_ohmy_disable_auto_update }}"
+HIST_STAMPS="yyyy/mm/dd"
+
+plugins=(
+{% for plugin in zsh_ohmy_plugins %}
+  {{ plugin }}
+{% endfor %}
+)
+
+source $ZSH/oh-my-zsh.sh
+
+if [ -f $HOME/.zshrc.local ]; then
+   source $HOME/.zshrc.local
+fi
+
+[ -f ~/.gpg-agent-info ] && source ~/.gpg-agent-info
+if [ -S "${GPG_AGENT_INFO%%:*}" ]; then
+    export GPG_AGENT_INFO
+    export SSH_AUTH_SOCK
+    export SSH_AGENT_PID
+else
+    #GPG_AGENT_SOCKET="${XDG_RUNTIME_DIR}/gnupg/S.gpg-agent.ssh"
+    #if [ ! -S $GPG_AGENT_SOCKET ]; then
+    #  gpg-agent --daemon >/dev/null 2>&1
+    #  export GPG_TTY=$(tty)
+    #fi
+
+    # Set SSH to use gpg-agent if it is configured to do so 
+    GNUPGCONFIG=${GNUPGHOME:-"$HOME/.gnupg/gpg-agent.conf"}
+    #if grep -q enable-ssh-support "$GNUPGCONFIG"; then
+    #  unset SSH_AGENT_PID
+    #  export SSH_AUTH_SOCK=$GPG_AGENT_SOCKET
+    #fi
+
+    #unset SSH_AGENT_PID
+    #eval $( gpg-agent --daemon ) 
+    #if [ "${gnupg_SSH_AUTH_SOCK_by:-0}" -ne $$ ]; then
+    #  export SSH_AUTH_SOCK="/run/user/$UID/gnupg/S.gpg-agent.ssh"
+    #fi
+    gpgconf --launch gpg-agent
+    SSH_AUTH_SOCK="/run/user/1000/gnupg/S.gpg-agent.ssh"
+    export SSH_AUTH_SOCK
+
+    GPG_TTY=$(tty)
+    export GPG_TTY   
+fi
+
+[ -z "$TMUX" ] && export TERM=xterm-256color
+
+alias i-up="sudo ipsec up `cat /etc/ipsec.conf  | head -1 | awk '{ print $2 }'`"
+alias i-down="sudo ipsec down `cat /etc/ipsec.conf  | head -1 | awk '{ print $2 }'`"
+export PATH="$HOME/.rbenv/bin:$PATH"
+eval "$(rbenv init -)"
+export PATH="$HOME/.rbenv/plugins/ruby-build/bin:$PATH"
+
+unset SSH_AGENT_PID
+if [ "${gnupg_SSH_AUTH_SOCK_by:-0}" -ne $$ ]; then
+  export SSH_AUTH_SOCK="$(gpgconf --list-dirs agent-ssh-socket)"
+fi
+export GPG_TTY=$(tty)
+gpg-connect-agent updatestartuptty /bye >/dev/null

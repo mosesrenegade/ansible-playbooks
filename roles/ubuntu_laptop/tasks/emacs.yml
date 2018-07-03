@@ -1,0 +1,24 @@
+---
+- block:
+  - name: Install emacs packages
+    become: yes
+    package:
+      name: "{{ item }}"
+      state: present
+    with_items: "{{ emacs_deps }}"
+    tags: packages
+
+  - name: Let's get out stuff sorted by bringing over our emacs stuff
+    git: repo="https://github.com/mosesrenegade/dotfiles" dest=/home/{{ dotfiles_users }}/dotfiles
+
+  - name: Let's symlink .emacs
+    file:
+      src: "/home/{{ dotfiles_users }}/dotfiles/.emacs"
+      dest: "/home/{{ dotfiles_users }}/.emacs"
+      state: link
+
+  - name: Let's symlink emacs.d
+    file:
+      src: "/home/{{ dotfiles_users }}/dotfiles/.emacs.d"
+      dest: "/home/{{ dotfiles_users }}/.emacs.d"
+      state: link
