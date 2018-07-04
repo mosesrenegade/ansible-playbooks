@@ -81,14 +81,29 @@
       recurse=yes
     become: yes
     become_user: root
-   
- # - name: Set permissions for oh my zsh dir
- #   become: yes
- #   file:
- #     path: "/home/{{ item }}/.oh-my-zsh"
- #     owner: "{{ item }}"
- #     group: "{{ item }}"
- #     state: directory
- #     recurse: yes
- #   with_items: "{{ zsh_users }}"
- #   tags: configuration
+
+  - name: Create Gemset Bundler
+    command: "{{ item }}"
+    args:
+      chdir: '/opt/metasploit-framework'
+    with_items:
+      - rbenv gemset create {{ rbenv.default_ruby }} metasploit-framework
+    ignore_errors: yes
+
+  - name: Install Bundler
+    copy:
+      src: msf.sh
+      dest: /opt/metasploit-framework
+      owner: "{{ ansible_env.USER }}"
+      group: "{{ ansible_env.USER }}"
+      mode: 0755
+    ignore_errors: yes
+
+  - name: Bundle Install
+    command: "{{ item }}"
+    args:
+      chdir: '/opt/metasploit-framework'
+    with_items:
+      - './msf.sh'
+    ignore_errors: yes
+    

@@ -58,7 +58,6 @@ rbenv_clean_up: false
 rbenv_repo: "https://github.com/rbenv/rbenv.git"
 
 rbenv_plugins:
-  - { name: "rbenv-vars",         repo: "https://github.com/rbenv/rbenv-vars.git",         version: "master" }
   - { name: "ruby-build",         repo: "https://github.com/rbenv/ruby-build.git",         version: "master" }
   - { name: "rbenv-gemset",       repo: "https://github.com/jf/rbenv-gemset.git",          version: "master" }
   
@@ -88,6 +87,7 @@ metasploit_packages:
 - build-essential
 - libreadline-dev
 - libssl-dev
+- libpq-dev
 - libpq5
 - libreadline5
 - libsqlite3-dev
