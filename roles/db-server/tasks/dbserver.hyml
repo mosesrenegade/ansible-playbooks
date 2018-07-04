@@ -1,0 +1,16 @@
+---
+- block:
+  - name: Update APT
+    apt: update_cache=yes cache_valid_time=86400
+    become: true
+    become_user: root
+    changed_when: false
+
+  - name: install db
+    apt:
+      with: "{{ item }}"
+      state: present
+    with_items: "{{ db_packages  }}"
+    become: true
+    become_user: root
+    
