@@ -1,9 +1,13 @@
 ---
+- set_fact:
+    is_cs: true
+  
 - include: ubuntu.yml
 - include: rbenv.yml
 - include: zsh.yml
 - include: snaps.yml
 - include: emacs.yml
 - include: metasploit.yml
+- include: empire.yml
 - include: cs.yml
-  when: is_cs == "yes"
+  when: is_cs == "true"

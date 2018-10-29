@@ -1,26 +1,53 @@
 ---
 laptop_installed_packages:
+- arc-theme
+- apt-transport-https
 - asciinema
 - build-essential
+- curl
+- conky
+- diodon
+- elixir
 - emacs
+- esl-erlang
+- ethtool
 - fonts-emojione
 - fonts-twemoji-svginot
+- freerdp2-x11 
+- remmina-plugin-rdp
 - gnome-tweak-tool
+- gnome-clocks
+- gnome-shell-extensions
+- gnutls-bin
+- intel-microcode
+- irssi
+- libaio1
 - libcanberra-gtk-module
 - libcurl4-openssl-dev
 - libffi-dev
+- libgmp-dev
 - libreadline-dev
 - libssl-dev
+- libxml2
 - libxml2-dev
 - libxslt1-dev
+- keypass
 - net-tools
 - network-manager-openvpn
 - network-manager-openvpn-gnome
 - openvpn
+- pidgin
+- python-pip
+- ruby-dev
 - scdaemon
+- smartmontools
+- software-properties-common
 - thunderbird
+- tlp
+- tlp-rdw
 - tmux
 - unzip
+- whois
 - zlib1g-dev
 - zsh
 
@@ -105,5 +132,17 @@ metasploit_packages:
 nmap_repo: "https://github.com/nmap/nmap.git"
 nmap_compile_root: "/usr/local/src/nmap"
 
+empire_repo: "https://github.com/EmpireProject/Empire"
+empire_dest: "/opt/Empire"
+
 framework_repo: "https://github.com/rapid7/metasploit-framework"
 framework_dest: "/opt/metasploit-framework"
+
+cs_installed_packages:
+- evolution
+- evolution-common
+- evolution-ews
+
+# Remember to add this: curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+# sudo apt-key fingerprint 0EBFCD88
+

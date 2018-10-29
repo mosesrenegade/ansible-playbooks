@@ -10,3 +10,9 @@
     shell: snap install chromium --classic
     become: true
     become_user: root
+
+  - name: Install Brave
+    shell: snap install brave --classic
+    become: true
+    become_user: root
+    

@@ -1,6 +1,0 @@
-  /opt/ansible-playbooks/roles/ubuntu_laptop/files:
-  total used in directory 16 available 373896428
-  drwxr-xr-x 2 moses moses 4096 Jul  3 14:31 .
-  drwxr-xr-x 8 moses moses 4096 Jul  3 12:55 ..
-  -rw-r--r-- 1 moses moses    8 Jul  3 12:33 default-gems
-  -rw-rw-r-- 1 moses moses   82 Jul  3 12:37 gemrc

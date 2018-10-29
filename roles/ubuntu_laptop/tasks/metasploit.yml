@@ -107,3 +107,8 @@
       - './msf.sh'
     ignore_errors: yes
     
+  - name: Install metasploit config
+    file:
+      src: database.yml.j2
+      dest: /opt/metasploit-framework/config/database.yml
+

@@ -1,26 +1,31 @@
 ---
 - block:
-  - name: Add new Thunderbird Repo
-    apt_repository:
-      repo: ppa:mozillateam/thunderbird-next
-      state: present
-    become: true
-    become_user: root
-    
-  - name: Add new font repo
-    apt_repository:
-      repo: ppa:eosrei/fonts
-      state: present
+  - name: Install Keybase
+    apt:
+      deb: https://prerelease.keybase.io/keybase_amd64.deb
     become: true
     become_user: root
 
-  - name: Add Java8
-    apt_repository:
-      repo: ppa:webupd8team/java
-      state: present
+  - name: Install Elixir
+    apt:
+      deb: https://packages.erlang-solutions.com/erlang-solutions_1.0_all.deb
     become: true
     become_user: root
-    
+
+  - name: Add different types of repositories
+    apt_repository:
+      repo: "{{ item }}"
+      state: present
+    with_items: 
+      - ppa:mozillateam/thunderbird-next
+      - ppa:eosrei/fonts
+      - ppa:webupd8team/java
+      - ppa:linrunner/tlp
+      - ppa:diodon-team/stable
+      - ppa:jtaylor/keepass
+    become: true
+    become_user: root
+     
   - name: update apt
     apt: update_cache=yes cache_valid_time=86400
     become: true
@@ -65,6 +70,12 @@
   - name: set number of workspaces to four
     command: gsettings set org.gnome.desktop.wm.preferences num-workspaces 4
 
+  - name: Set New Theme
+    command: gsettings set org.gnome.desktop.interface gtk-theme "Arc-Dark"  
+
+  - name: Set New Theme 2
+    command: gsettings set org.gnome.desktop.wm.preferences theme "Arc-Dark"
+    
   # Touchpad settings
   - name: modify touchpad settings
     command: gsettings set org.gnome.desktop.peripherals.touchpad {{ item.key }} {{ item.value }}
@@ -85,7 +96,34 @@
     - key: 'click-method'
       value: 'fingers'
 
+  - name: Modify CTRL key settings
+    command: gsettings set org.gnome.desktop.input-sources xkb-options "['ctrl:swapcaps']" 
+
   - debug:
       msg: "NOTE: You must logout before keyboard shortcuts will work."
   tags:
   - gnome3
+
+- block:
+  - name: Copy Autostart
+    become: yes
+    become_user: root
+    copy:
+      src: vmware-autostart
+      dest: /etc/init.d
+      owner: root
+      group: root
+      mode: 0755
+
+  - name: Run update-rc.d
+    command: update-rc.d vmware-autostart defaults
+    become: yes
+    become_user: root
+
+  - name: Set Autostart to run
+    become: yes
+    become_user: root
+    systemd:
+      name: vmware-autostart
+      enabled: yes
+      
