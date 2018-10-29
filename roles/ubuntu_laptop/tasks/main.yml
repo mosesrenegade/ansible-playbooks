@@ -5,3 +5,5 @@
 - include: snaps.yml
 - include: emacs.yml
 - include: metasploit.yml
+- include: cs.yml
+  when: is_cs == "yes"
