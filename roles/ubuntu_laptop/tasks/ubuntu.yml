@@ -61,6 +61,12 @@
     become_user: root
 
   # UI settings
+  - name: click to minimize in gnome3
+    command: gsettings set org.gnome.shell.extensions.dash-to-dock click-action 'minimize' 
+
+  - name: battery percentage
+    command: gsettings set org.gnome.desktop.interface show-battery-percentage true
+    
   - name: enable minimize and maximize buttons
     command: gsettings set org.gnome.desktop.wm.preferences button-layout "appmenu:minimize,maximize,close"
 
