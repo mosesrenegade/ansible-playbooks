@@ -5,4 +5,5 @@
 - include: emacs.yml
 - include: docker.yml
 - include: zsh.yml
+- include: rbenv.yml
 - include: user.yml
