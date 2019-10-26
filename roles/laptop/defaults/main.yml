@@ -1,18 +1,33 @@
 ---
 laptop_installed_packages:
 - apt-transport-https
+- brave-browser
 - build-essential
+- ca-certificates
 - curl
 - dconf-cli
 - dconf-gsettings-backend
 - diodon
 - emacs
+- gnupg2
 - network-manager-openvpn
 - network-manager-openvpn-gnome
 - openvpn
 - python3-pip
+- python3-setuptools
 - ruby-dev
 - software-properties-common
 - unzip
+- virtualenv
 - zsh
 
+zsh_ohmy_custom_plugins:
+  - name: zsh-syntax-highlighting
+    repo: "git://github.com/zsh-users/zsh-syntax-highlighting.git"
+  - name: zsh-autosuggestions
+    repo: "git://github.com/zsh-users/zsh-autosuggestions.git"
+
+zsh_ohmy_plugins:
+  - git
+  - zsh-syntax-highlighting
+  - zsh-autosuggestions

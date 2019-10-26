@@ -1,0 +1,28 @@
+---
+- name: RBENV - Clone repo
+  git:
+    repo: https://github.com/rbenv/rbenv
+    dest: ~/.rbenv
+    version: 2.5.1
+    accept_hostkey: yes
+  ignore_errors: yes
+
+- name: RBENV Plugin Directory
+  file:
+    state: directory
+    path: ~/.rbenv/plugins
+  ignore_errors: yes
+
+- name: RBENV Repo Plugin - Ruby Build
+  git:
+    repo: https://github.com/rbenv/ruby-build
+    dest: ~/.rbenv/plugins/ruby-build
+    accept_hostkey: yes
+  ignore_errors: yes
+
+- name: RBENV Repo Plugin - Gemset
+  git:
+    repo: https://github.com/rbenv/rbenv-gemset
+    dest: ~/.rbenv/plugins/rbenv-gemset
+    accept_hostkey: yes
+  ignore_errors: yes

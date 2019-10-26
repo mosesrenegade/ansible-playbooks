@@ -6,6 +6,15 @@
   with_items:
     - ppa:ansible/ansible
 
+- name: APT - Add Brave Repository ID
+  apt_key:
+    url: https://brave-browser-apt-release.s3.brave.com/brave-core.asc
+    state: present
+
+- name: APT - Add Brave Repository
+  apt_repository:
+    repo: deb [arch=amd64] https://brave-browser-apt-release.s3.brave.com/ {{ansible_distribution_release}} main
+  
 - name: APT - Update
   apt:
     update_cache: yes
@@ -14,7 +23,6 @@
   become: true
   become_user: root  
   
-
 - name: APT - Install packages
   apt:
     name: "{{ laptop_installed_packages }}"

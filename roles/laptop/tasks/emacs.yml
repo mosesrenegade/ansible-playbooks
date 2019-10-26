@@ -1,0 +1,18 @@
+---
+- name: EMACS - Get my dotfiles
+  git:
+    repo: https://github.com/mosesrenegade/dotfiles
+    dest: ~/dotfiles
+    accept_hostkey: yes
+    force: yes
+
+- name: EMACS - Symlink .emacs stuff
+  file:
+    src: ~/dotfiles/.emacs
+    dest: ~/.emacs
+    state: link
+  ignore_errors: yes
+
+- name: EMACS - Symlink .emacs.d stuff
+  raw: "ln -sf ~/dotfiles/.emacs.d ~/.emacs.d"
+  ignore_errors: yes

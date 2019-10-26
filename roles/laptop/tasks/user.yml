@@ -1,0 +1,9 @@
+---
+- name: Install Moses User
+  user:
+    name: moses
+    comment: Moses Frost
+    groups: docker,adm,sudo
+    shell: /bin/zsh
+    append: yes
+    update_password: on_create

@@ -1,0 +1,24 @@
+---
+- name: Clone oh-my-zsh repository
+  become: yes
+  git:
+    repo: https://github.com/robbyrussell/oh-my-zsh.git
+    dest: "~/.oh-my-zsh"
+    accept_hostkey: yes
+    update: yes
+    
+- name: Clone oh-my-zsh custom plugin - syntax
+  become: yes
+  git:
+    repo: https://github.com/zsh-users/zsh-syntax-highlighting
+    dest: "~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting"
+    accept_hostkey: yes
+    update: yes
+
+- name: Clone oh-my-zsh custom plugin - autosuggestion
+  become: yes
+  git:
+    repo: https://github.com/zsh-users/zsh-autosuggestions
+    dest: "~/.oh-my-zsh/custom/plugins/zsh-autosuggestions"
+    accept_hostkey: yes
+    update: yes

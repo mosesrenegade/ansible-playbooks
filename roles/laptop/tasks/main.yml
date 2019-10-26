@@ -2,3 +2,7 @@
 
 - include: ubuntu.yml
 - include: gnome3.yml
+- include: emacs.yml
+- include: docker.yml
+- include: zsh.yml
+- include: user.yml
