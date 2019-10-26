@@ -1,0 +1,21 @@
+---
+- name: APT - Add repo's
+  apt_repository:
+    repo: "{{ item }}"
+    state: present
+  with_items:
+    - ppa:ansible/ansible
+
+- name: APT - Update
+  apt:
+    update_cache: yes
+    cache_valid_time: 3600
+    force_apt_get: yes
+  become: true
+  become_user: root  
+  
+
+- name: APT - Install packages
+  apt:
+    name: "{{ laptop_installed_packages }}"
+    state: present

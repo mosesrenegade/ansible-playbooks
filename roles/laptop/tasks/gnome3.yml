@@ -1,0 +1,19 @@
+--- 
+- name: GNOME - Battery percentage
+  command: gsettings set org.gnome.desktop.interface show-battery-percentage true
+    
+- name: GNOME - Enable minimize and maximize buttons
+  command: gsettings set org.gnome.desktop.wm.preferences button-layout "appmenu:minimize,maximize,close"
+
+# Touchpad settings
+- name: GNOME - Modify Touchpad
+  command: gsettings set org.gnome.desktop.peripherals.touchpad {{ item.key }} {{ item.value }}
+  with_items:
+  # Enable natural scrolling
+  - key: 'natural-scroll'
+    value: 'true'
+
+- name: Modify CTRL key settings
+  command: gsettings set org.gnome.desktop.input-sources xkb-options "['ctrl:swapcaps']" 
+
+

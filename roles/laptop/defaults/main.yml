@@ -1,0 +1,18 @@
+---
+laptop_installed_packages:
+- apt-transport-https
+- build-essential
+- curl
+- dconf-cli
+- dconf-gsettings-backend
+- diodon
+- emacs
+- network-manager-openvpn
+- network-manager-openvpn-gnome
+- openvpn
+- python3-pip
+- ruby-dev
+- software-properties-common
+- unzip
+- zsh
+
