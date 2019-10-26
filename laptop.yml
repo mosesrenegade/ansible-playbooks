@@ -2,6 +2,8 @@
 # Configures a Fedora laptop the way I like it.
 - hosts: localhost
   connection: local
+  become: yes
+  become_user: root
 
   roles:
-  - ubuntu_laptop
+  - laptop
