@@ -11,3 +11,8 @@
   apt:
     name: docker-ce
     update_cache: yes
+
+-- name: DOCKER - install compose
+   pip:
+     name: docker-compose
+     executable: pip3

@@ -1,0 +1,43 @@
+---
+- name: VAGRANT - Download
+  get_url:
+    url: https://releases.hashicorp.com/vagrant/2.2.6/vagrant_2.2.6_linux_amd64.zip
+    dest: /tmp/vagrant_2.2.6_linux_amd64.zip
+
+- name: VAGRANT - Unzip
+  raw: unzip /tmp/vagrant_2.2.6_linux_amd64.zip -d /tmp
+  ignore_errors: yes
+
+- name: VAGRANT - Move file
+  raw: mv /tmp/vagrant /usr/bin/vagrant
+  become_user: root
+  become: yes
+
+- name: VAGRANT - Delete zip
+  raw: rm /tmp/vagrant*
+
+- name: VAGRANT - Install Plugin
+  raw: vagrant plugin install vagrant-vmware-desktop
+
+- name: VAGRANT - Install VMWARE Utility
+  get_url:
+    url: https://releases.hashicorp.com/vagrant-vmware-utility/1.0.7/vagrant-vmware-utility_1.0.7_linux_amd64.zip
+    dest: /tmp/vagrant-vmware-utility_1.0.7_linux_amd64.zip
+
+- name: VAGRANT - Unzip the VMWARE Utiltiy
+  raw: unzip /tmp/vagrant-vmware-utility_1.0.7_linux_amd64.zip -d /tmp
+
+- name: Create the vagrant vmware utility folder
+  file:
+    directory: /opt/vagrant-vmware-utility
+    state: present
+    onwer: moses
+  become: yes
+  become_user: root
+  
+#- name: Install the utility
+#  raw: mv /tmp/vagrant-vmware-utility /usr
+#  become: yes
+#  become_user: root
+  
+    

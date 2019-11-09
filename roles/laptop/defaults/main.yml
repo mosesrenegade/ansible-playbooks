@@ -9,9 +9,16 @@ laptop_installed_packages:
 - dconf-gsettings-backend
 - diodon
 - emacs
+- gnome-tweaks
+- gnome-tweak-tool
 - gnupg2
+- libreadline-dev
+- nodejs
+- npm
 - network-manager-openvpn
 - network-manager-openvpn-gnome
+- network-manager-l2tp
+- network-manager-l2tp-gnome
 - openvpn
 - python3-pip
 - python3-setuptools
@@ -20,6 +27,7 @@ laptop_installed_packages:
 - unzip
 - virtualenv
 - zsh
+- zlib1g-dev
 
 zsh_ohmy_custom_plugins:
   - name: zsh-syntax-highlighting

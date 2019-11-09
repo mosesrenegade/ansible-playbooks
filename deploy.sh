@@ -9,3 +9,5 @@ if [ -z $( which ansible ) ]
 fi
 
 sudo ansible-playbook -i inventory laptop.yml
+cd ~/
+sudo chown -R $USER:$USER .

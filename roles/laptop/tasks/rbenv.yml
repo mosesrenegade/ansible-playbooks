@@ -25,3 +25,7 @@
     dest: ~/.rbenv/plugins/rbenv-gemset
     accept_hostkey: yes
   ignore_errors: yes
+
+- name: Install ruby 2.6.5
+  shell: rbenv install 2.6.5
+

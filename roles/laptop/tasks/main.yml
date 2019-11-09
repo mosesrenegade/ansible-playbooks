@@ -6,4 +6,6 @@
 - include: docker.yml
 - include: zsh.yml
 - include: rbenv.yml
+- include: terraform.yml
+- include: vagrant.yml
 - include: user.yml

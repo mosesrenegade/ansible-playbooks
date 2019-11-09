@@ -1,0 +1,18 @@
+---
+- name: TERRAFORM - Download Terraform
+  get_url:
+    url: https://releases.hashicorp.com/terraform/0.12.12/terraform_0.12.12_linux_amd64.zip
+    dest: /tmp/terraform_0.12.12_linux_amd64.zip
+
+- name: TERRAFORM - Unzip
+  raw: unzip /tmp/terraform_0.12.12_linux_amd64.zip -d /tmp
+
+- name: TERRAFORM - Move file
+  raw: mv /tmp/terraform /usr/bin/terraform
+  become_user: root
+  become: yes
+
+- name: TERRAFORM - Delete zip
+  raw: rm /tmp/terraform*
+  
+  
